@@ -14,7 +14,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout the code
-              uses: actions/checout@v2
+              uses: actions/checkout@v2
 
             - name: Docker login
               uses: docker/login-action@v2 # try to cretate your own action , same as NPM packges making 
