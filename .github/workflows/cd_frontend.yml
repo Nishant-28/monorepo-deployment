@@ -25,11 +25,10 @@ jobs:
             - name: Build and push
               uses: docker/build-push-action@v3
               with:
-                context: .
-                file: ./docker/Dockerfile.frontend
-                build-args:
+                  context: .
+                  file: ./docker/Dockerfile.frontend
+                  build-args: >
                     DATABASE_URL=${{ secrets.DATABASE_URL }}
-                push: true
-                tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-frontend:${{ github.sha }}
-                no-cache: true
-             
+                  push: true
+                  tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-frontend:${{ github.sha }}
+                  no-cache: true
