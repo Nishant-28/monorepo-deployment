@@ -3,8 +3,7 @@ FROM oven/bun:1
 WORKDIR /usr/src/app
 
 ARG DATABASE_URL
-
-ENV DATABASE_URL=${DATABASE_URL}
+ENV DATABASE_URL=$DATABASE_URL
 
 COPY ./packages ./packages
 COPY ./bun.lockb ./bun.lockb
@@ -12,9 +11,8 @@ COPY ./package.json ./package.json
 COPY ./turbo.json ./turbo.json
 COPY ./apps/web ./apps/web
 
-RUN bun install
-RUN bun run db:generate
-RUN bun run build
+RUN echo "DATABASE_URL is: $DATABASE_URL"  # Debugging
+RUN env DATABASE_URL=$DATABASE_URL bun run build  # Explicitly set it
 
 EXPOSE 3000
 

@@ -31,4 +31,5 @@ jobs:
                     DATABASE_URL=${{ secrets.DATABASE_URL }}
                 push: true
                 tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-frontend:${{ github.sha }}
+                no-cache: true
              
