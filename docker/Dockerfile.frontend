@@ -1,8 +1,34 @@
+# FROM oven/bun:1
+
+# WORKDIR /usr/src/app
+
+# ARG DATABASE_URL
+
+# COPY ./packages ./packages
+# COPY ./bun.lockb ./bun.lockb
+
+# COPY ./package.json ./package.json
+# COPY ./turbo.json ./turbo.json
+
+# COPY ./apps/web ./apps/web
+
+# RUN bun install
+# RUN bun run db:generate
+# RUN DATABASE_URL=${DATABASE_URL} bun run build
+
+# EXPOSE 3000
+
+# CMD ["bun", "run", "start:web"]
+
 FROM oven/bun:1
 
 WORKDIR /usr/src/app
 
+# Define ARG which can be passed at build time
 ARG DATABASE_URL
+
+# Set it as an ENV variable so it's available during build and runtime
+ENV DATABASE_URL=${DATABASE_URL}
 
 COPY ./packages ./packages
 COPY ./bun.lockb ./bun.lockb
@@ -14,7 +40,8 @@ COPY ./apps/web ./apps/web
 
 RUN bun install
 RUN bun run db:generate
-RUN DATABASE_URL=${DATABASE_URL} bun run build
+# Use the ENV variable instead of directly using the ARG
+RUN bun run build
 
 EXPOSE 3000
 
