@@ -1,0 +1,18 @@
+FROM oven/bun:1
+
+WORKDIR /usr/src/app
+
+COPY ./packages ./packages
+COPY ./bun.lockb ./bun.lockb
+
+COPY ./package.json ./package.json
+COPY ./tsconfig.json ./tsconfig.json
+
+COPY ./apps/ws ./apps/ws
+
+RUN bun install
+RUN bun run db:generate
+
+EXPOSE 8081
+
+CMD ["bun", "run", "start:ws"]
