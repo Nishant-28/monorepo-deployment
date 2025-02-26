@@ -1,7 +1,3 @@
-# build the docker image
-# push the image to hub
-# SSH into our VM and start the new image
-
 name: CD Websocket server 
 
 on:
@@ -29,4 +25,3 @@ jobs:
                 file: ./docker/Dockerfile.ws
                 push: true
                 tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-ws:${{ github.sha }}
-             
